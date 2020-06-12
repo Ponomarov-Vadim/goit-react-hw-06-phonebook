@@ -36,7 +36,7 @@ Filter.propTypes = {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
-    })
+    }).isRequired
   ),
 };
 
@@ -46,7 +46,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   contacts: state.contacts,
-  filter: state.filter,
+  filter: state.contactsFilter,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);
