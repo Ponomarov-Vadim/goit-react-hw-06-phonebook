@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import Filter from "../Filter";
-import ContactForm from "../ContactForm";
-import ContactList from "../ContactList";
+import Filter from "../../Redux/containers/FilterContainer";
+import ContactForm from "../../Redux/containers/ContactFormContainer";
+import ContactList from "../../Redux/containers/ContactListContainer";
 
 import { connect } from "react-redux";
 import { addContact } from "../../Redux/actions";

@@ -4,9 +4,6 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { CSSTransition } from "react-transition-group";
 import popTransition from "../../transitions/pop.module.css";
-import { filter } from "../../Redux/actions";
-
-import { connect } from "react-redux";
 
 const Filter = ({ contactsFilter, contacts, filter }) => (
   <CSSTransition
@@ -40,13 +37,4 @@ Filter.propTypes = {
   ),
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  contactsFilter: ({ target: { value } }) => dispatch(filter(value)),
-});
-
-const mapStateToProps = (state) => ({
-  contacts: state.contacts,
-  filter: state.contactsFilter,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default Filter;

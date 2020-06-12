@@ -2,11 +2,9 @@ import React from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import slideTransition from "../../transitions/slideFromLeft.module.css";
 
-import { deleteContact } from "../../Redux/actions";
 import styled from "./ContactList.module.css";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { connect } from "react-redux";
 import { save } from "../../services/localStorage";
 
 const ContactList = ({ contacts, filter, deleteContact }) => {
@@ -54,13 +52,4 @@ ContactList.propTypes = {
   deleteContact: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  deleteContact: ({ target: { name } }) => dispatch(deleteContact(name)),
-});
-
-const mapStateToProps = (state) => ({
-  contacts: state.contacts,
-  filter: state.contactsFilter,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+export default ContactList;

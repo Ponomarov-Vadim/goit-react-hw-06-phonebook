@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Alert from "../Alert";
 import { addContact } from "../../Redux/actions";
-import { connect } from "react-redux";
 
 const initialState = {
   name: "",
@@ -93,8 +92,10 @@ ContactForm.propTypes = {
   ),
 };
 
-const mapStateToProps = (state) => ({
-  contacts: state.contacts,
-});
+export default ContactForm;
 
-export default connect(mapStateToProps, null)(ContactForm);
+// const mapStateToProps = (state) => ({
+//   contacts: state.contacts,
+// });
+
+// export default connect(mapStateToProps, null)(ContactForm);
