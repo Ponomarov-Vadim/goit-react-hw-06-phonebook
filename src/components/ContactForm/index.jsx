@@ -5,6 +5,8 @@ import slideTransition from "../../transitions/slideFromRight.module.css";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Alert from "../Alert";
+import { addContact } from "../../Redux/actions";
+import { connect } from "react-redux";
 
 const initialState = {
   name: "",
@@ -13,7 +15,7 @@ const initialState = {
 
 const isTelNumber = (tel) => !Number.isNaN(Number(tel.split("-").join("")));
 
-export default class ContactForm extends Component {
+class ContactForm extends Component {
   state = { ...initialState, alertMessage: "" };
 
   handleChange = ({ target: { name, value } }) => {
@@ -23,10 +25,10 @@ export default class ContactForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { name, number } = this.state;
-    const { contacts, addContact } = this.props;
+    const { contacts, dispatch } = this.props;
     if (contacts.find((contact) => contact.name === name) === undefined) {
       if (isTelNumber(number)) {
-        addContact(name, number);
+        dispatch(addContact(name, number));
       } else {
         this.setState({
           alertMessage: `${number} is incorrect telephone number!`,
@@ -54,6 +56,7 @@ export default class ContactForm extends Component {
         >
           <Alert alertMessage={alertMessage} />
         </CSSTransition>
+
         <form onSubmit={this.handleSubmit} className={classNames(styled.form)}>
           <h3>Name</h3>
           <input
@@ -81,12 +84,17 @@ export default class ContactForm extends Component {
 }
 
 ContactForm.propTypes = {
-  addContact: PropTypes.func.isRequired,
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
+    })
+  ),
 };
+
+const mapStateToProps = (state) => ({
+  contacts: state.contacts,
+});
+
+export default connect(mapStateToProps, null)(ContactForm);
